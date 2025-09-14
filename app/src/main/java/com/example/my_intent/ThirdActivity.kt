@@ -1,14 +1,11 @@
-package com.example.my_intent // Ganti dengan nama package Anda
+package com.example.my_intent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.my_intent.databinding.ActivityThirdBinding
-// Pastikan nama binding sudah sesuai dengan nama file layout (activity_third.xml -> ActivityThirdBinding)
-
 
 class ThirdActivity : AppCompatActivity() {
 
-    // Nama binding disesuaikan menjadi ActivityThirdBinding
     private lateinit var binding: ActivityThirdBinding
 
     companion object {
@@ -22,12 +19,25 @@ class ThirdActivity : AppCompatActivity() {
         binding = ActivityThirdBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Mengambil data dari intent
         val name = intent.getStringExtra(EXTRA_NAME) ?: "Data tidak ditemukan"
         val nim = intent.getStringExtra(EXTRA_NIM) ?: "Data tidak ditemukan"
         val hobby = intent.getStringExtra(EXTRA_HOBBY) ?: "Data tidak ditemukan"
 
+        // Menampilkan data di TextView
         binding.tvDetailName.text = "Nama: $name"
         binding.tvDetailNim.text = "NIM: $nim"
         binding.tvDetailHobby.text = "Hobi: $hobby"
+
+        // --- KODE TAMBAHAN DIMULAI DI SINI ---
+
+        // Menambahkan listener klik pada tombol kembali
+        binding.btnBackToMain.setOnClickListener {
+            // Perintah untuk menutup Activity saat ini (ThirdActivity)
+            // dan kembali ke Activity sebelumnya di tumpukan (MainActivity)
+            finish()
+        }
+
+        // --- KODE TAMBAHAN SELESAI ---
     }
 }

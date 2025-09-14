@@ -1,36 +1,33 @@
-package com.example.my_intent
+package com.example.my_intent // Ganti dengan nama package Anda
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.my_intent.databinding.ActivityMainBinding
 import com.example.my_intent.databinding.ActivityThirdBinding
+// Pastikan nama binding sudah sesuai dengan nama file layout (activity_third.xml -> ActivityThirdBinding)
+
 
 class ThirdActivity : AppCompatActivity() {
 
+    // Nama binding disesuaikan menjadi ActivityThirdBinding
     private lateinit var binding: ActivityThirdBinding
+
+    companion object {
+        const val EXTRA_NAME = "extra_name"
+        const val EXTRA_NIM = "extra_nim"
+        const val EXTRA_HOBBY = "extra_hobby"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
         binding = ActivityThirdBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        with(binding){
-            btnBackToSecondActivity.setOnClickListener {
-                val resultIntent = Intent()
+        val name = intent.getStringExtra(EXTRA_NAME) ?: "Data tidak ditemukan"
+        val nim = intent.getStringExtra(EXTRA_NIM) ?: "Data tidak ditemukan"
+        val hobby = intent.getStringExtra(EXTRA_HOBBY) ?: "Data tidak ditemukan"
 
-                resultIntent.putExtra("address", edtAddress.text.toString())
-
-                setResult(RESULT_OK, resultIntent)
-
-                finish()
-            }
-        }
+        binding.tvDetailName.text = "Nama: $name"
+        binding.tvDetailNim.text = "NIM: $nim"
+        binding.tvDetailHobby.text = "Hobi: $hobby"
     }
 }
